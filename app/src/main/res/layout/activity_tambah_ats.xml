@@ -1,0 +1,216 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:scrollbarStyle="outsideOverlay">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama Faskes"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_maxCharacters="100"
+                    app:met_singleLineEllipsis="true"
+                    app:met_clearButton="true"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Alamat"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_singleLineEllipsis="true"
+                    app:met_clearButton="true"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/kelurahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kelurahan"
+                    app:met_floatingLabel="highlight"
+                    app:met_singleLineEllipsis="true"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Kecamatan"
+                    android:layout_height="wrap_content"/>
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Kategori"
+                    android:layout_height="wrap_content"/>
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/kategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Hari Buka"
+                    android:layout_height="wrap_content"/>
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/haribuka"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Hari Tutup"
+                    android:layout_height="wrap_content"/>
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/haritutup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/jambuka"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Jam Buka / Pagi (Ex: Jam = 08.00 / Pagi = 06.00 - 07.30)"
+                    app:met_singleLineEllipsis="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/jamtutup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Jam Tutup / Sore (Ex: Jam = 22.00 / Pagi = 17.00 - 19.30)"
+                    app:met_singleLineEllipsis="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pemilik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pemilik / Penanggungjawab"
+                    app:met_floatingLabel="highlight"
+                    app:met_singleLineEllipsis="true"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <com.dd.processbutton.FlatButton
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/btnGetLatLong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Lat / Long"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:pb_colorNormal="@color/primary_dark"
+                    app:pb_colorPressed="@color/primary"
+                    app:pb_cornerRadius="4dp" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/latitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Latitude"
+                    android:text="0"
+                    app:met_singleLineEllipsis="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/longitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Longitude"
+                    android:text="0"
+                    app:met_singleLineEllipsis="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="0dp"
+                    app:met_clearButton="true"/>
+
+                <ImageView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/img_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="fitCenter" />
+
+                <com.dd.processbutton.FlatButton
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/btnUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SIMPAN"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:pb_colorNormal="@color/primary_dark"
+                    app:pb_colorPressed="@color/primary"
+                    app:pb_cornerRadius="4dp" />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </ScrollView>
+
+</LinearLayout>

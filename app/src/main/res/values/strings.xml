@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">KUDU Sekolah</string>
+    <string name="app_name_long">Kembali Upayakan Dukungan Untuk Sekolah</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="account">Account</string>
+    <string name="pathfoto">http://kudusekolah.pekalongankab.go.id/assets/foto-ats/</string>
+
+    <string name="facebook_app_id">2209471329110181</string>
+    <string name="fb_login_protocol_scheme">fb2209471329110181</string>
+
+    <string name="selected_place_info">Selected location information:\n%1$s</string>
+    <string name="go_to_picker_activity">Go to place picker activity</string>
+
+    <string name="access_token" translatable="false">sk.eyJ1IjoicmFnc2hpb24iLCJhIjoiY2p1dXVzdzR5MGVneTRlbm9reDNxMXFseCJ9.xehhCJkskfVTk_2XmCZk5w</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>
