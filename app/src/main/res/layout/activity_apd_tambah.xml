@@ -240,7 +240,7 @@
                         android:id="@+id/tv_pddk_akh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Pendidikan Terakhir"
+                        android:hint="Pendidikan Saat Ini"
                         android:inputType="text"
                         android:focusable="false"
                         app:met_floatingLabel="highlight"
@@ -252,7 +252,7 @@
                         android:id="@+id/tv_kategori"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Kategori"
+                        android:hint="Jenis Disabilitas"
                         android:inputType="text"
                         android:focusable="false"
                         app:met_floatingLabel="highlight"
@@ -264,26 +264,13 @@
                         android:id="@+id/tv_sekolah"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sekolah Sebelumnya"
+                        android:hint="Nama Sekolah"
                         android:inputType="text"
                         android:focusable="false"
                         app:met_floatingLabel="highlight"
                         app:met_iconPadding="0dp"
                         app:met_singleLineEllipsis="true"
                         app:met_clearButton="true"/>
-
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/tx_alasan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Alasan"
-                        android:inputType="text"
-                        android:focusable="false"
-                        app:met_floatingLabel="highlight"
-                        app:met_iconPadding="0dp"
-                        app:met_singleLineEllipsis="true"
-                        app:met_clearButton="true"/>
-
 
                     <TextView
                         android:layout_marginTop="16dp"

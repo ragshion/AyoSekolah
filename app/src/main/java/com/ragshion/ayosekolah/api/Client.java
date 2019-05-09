@@ -18,8 +18,8 @@ public class Client {
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://kudusekolah.pekalongankab.go.id") //http://boombox.ng
-//                    .baseUrl("http://192.168.1.188/bts/")
+//                    .baseUrl("http://kudusekolah.pekalongankab.go.id") //http://boombox.ng
+                    .baseUrl("http://192.168.1.188/bts/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 

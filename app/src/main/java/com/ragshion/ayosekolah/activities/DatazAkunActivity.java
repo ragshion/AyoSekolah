@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,6 +50,7 @@ public class DatazAkunActivity extends AppCompatActivity {
     Toolbar dataztoolbar;
     ImageView ic_livesearch;
     SharedPrefManager sharedPrefManager;
+    GifImageView loading;
 
     @Override
     public boolean onSupportNavigateUp(){
@@ -64,6 +66,7 @@ public class DatazAkunActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview_list_data);
         movies = new ArrayList<>();
         sharedPrefManager = new SharedPrefManager(this);
+        loading = findViewById(R.id.loading);
 
         dataztoolbar = findViewById(R.id.dataztoolbar);
         setSupportActionBar(dataztoolbar);
@@ -103,7 +106,7 @@ public class DatazAkunActivity extends AppCompatActivity {
 
     void countdata(){
         Service serviceApi = Client.getClient();
-        Call<ResponseBody> count = serviceApi.countAkun(sharedPrefManager.getSpUser());
+        Call<ResponseBody> count = serviceApi.countAkun(sharedPrefManager.getSpUser(), "data_ats");
         count.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -135,6 +138,7 @@ public class DatazAkunActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Dataz>> call, Response<List<Dataz>> response) {
                 if(response.isSuccessful()){
+                    loading.setVisibility(View.GONE);
                     List<Dataz> result = response.body();
                     if(result.size()<=0){
                         Toast.makeText(context,"Maaf, Saat Ini Belum ada Data pada Kategori Tersebut", Toast.LENGTH_SHORT).show();

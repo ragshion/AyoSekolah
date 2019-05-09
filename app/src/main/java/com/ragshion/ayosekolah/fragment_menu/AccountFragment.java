@@ -26,8 +26,10 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.ragshion.ayosekolah.R;
 import com.ragshion.ayosekolah.activities.DaftarActivity;
 import com.ragshion.ayosekolah.activities.DatazAkunActivity;
+import com.ragshion.ayosekolah.activities.DatazAkunApdActivity;
 import com.ragshion.ayosekolah.activities.LoginActivity;
 import com.ragshion.ayosekolah.activities.MenuUtamaActivity;
+import com.ragshion.ayosekolah.activities.TambahApdActivity;
 import com.ragshion.ayosekolah.activities.TambahAtsActivity;
 import com.ragshion.ayosekolah.api.Client;
 import com.ragshion.ayosekolah.api.Service;
@@ -127,10 +129,26 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        cardTambahAPD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), TambahApdActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
         cardATS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DatazAkunActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardAPD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DatazAkunApdActivity.class);
                 startActivity(intent);
             }
         });
@@ -142,7 +160,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onRefresh() {
                 cek_usulan();
-                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -185,7 +202,7 @@ public class AccountFragment extends Fragment {
                         if (jsonRESULTS.getString("status").equals("true")){
                             total_ats.setText(jsonRESULTS.getString("total_ats"));
                             total_apd.setText(jsonRESULTS.getString("total_apd"));
-
+                            swipeRefreshLayout.setRefreshing(false);
                         }else{
                             Toast.makeText(getView().getContext(), jsonRESULTS.getString("respon"), Toast.LENGTH_SHORT).show();
                         }

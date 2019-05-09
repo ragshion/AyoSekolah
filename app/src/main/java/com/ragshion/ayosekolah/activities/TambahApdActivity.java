@@ -1,12 +1,9 @@
 package com.ragshion.ayosekolah.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -18,7 +15,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -39,7 +35,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 import com.ragshion.ayosekolah.R;
-import com.ragshion.ayosekolah.adapter.SimpleArrayListAdapter;
 import com.ragshion.ayosekolah.api.Client;
 import com.ragshion.ayosekolah.api.Service;
 import com.ragshion.ayosekolah.objek.Lokasi;
@@ -56,8 +51,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
-import gr.escsoft.michaelprimez.searchablespinner.interfaces.OnItemSelectedListener;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import okhttp3.ResponseBody;
@@ -68,7 +61,7 @@ import retrofit2.Response;
 //import com.rtchagas.pingplacepicker.PingPlacePicker;
 
 
-public class TambahAtsActivity extends AppCompatActivity {
+public class TambahApdActivity extends AppCompatActivity {
 
     int PLACE_PICKER_REQUEST = 1;
 //    GoogleApiClient googleApiClient;
@@ -94,7 +87,7 @@ public class TambahAtsActivity extends AppCompatActivity {
     SpinnerDialog spinnerKecamatan, spinnerDesa, spinnerPekerjaan, spinnerPddk_akh, spinnerKategori, spinnerStat, spinnerSekolah, spinnerAyah, spinnerIbu;
 
     MaterialEditText nik, nama, tgl_lahir, alamat, nama_ayah, nama_ibu, jk, agama, latitude, longitude, rt, rw;
-    MaterialEditText tx_alasan, tv_kecamatan, tv_desa, tv_pekerjaan, tv_stat, tv_pddk_akh, tv_kategori, tv_sekolah, tv_pekerjaan_ayah, tv_pekerjaanibu;
+    MaterialEditText tv_kecamatan, tv_desa, tv_pekerjaan, tv_stat, tv_pddk_akh, tv_kategori, tv_sekolah, tv_pekerjaan_ayah, tv_pekerjaanibu;
 
     private ArrayList<Image> images = new ArrayList<>();
 
@@ -111,7 +104,7 @@ public class TambahAtsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ats_tambah);
+        setContentView(R.layout.activity_apd_tambah);
 
         sharedPrefManager = new SharedPrefManager(this);
         Mapbox.getInstance(this, getResources().getString(R.string.access_token));
@@ -120,7 +113,7 @@ public class TambahAtsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Tambah Data ATS");
+        getSupportActionBar().setTitle("Tambah Data APD/ABK");
 
 //        NEW SPINNER DIALOG
 
@@ -169,7 +162,7 @@ public class TambahAtsActivity extends AppCompatActivity {
         tv_stat = findViewById(R.id.tv_stat);
         array_stat.add("KAWIN");
         array_stat.add("BELUM KAWIN");
-        spinnerStat = new SpinnerDialog(TambahAtsActivity.this,array_stat,"Status Perkawinan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+        spinnerStat = new SpinnerDialog(TambahApdActivity.this,array_stat,"Status Perkawinan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
         spinnerStat.setCancellable(true); // for cancellable
         spinnerStat.setShowKeyboard(false);// for open keyboard by default
         spinnerStat.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -187,33 +180,17 @@ public class TambahAtsActivity extends AppCompatActivity {
         });
 
         tv_pddk_akh = findViewById(R.id.tv_pddk_akh);
-        array_pddk_akh.add("TIDAK PERNAH SEKOLAH");
-        array_pddk_akh.add("PUTUS KELAS 1 (SD/MI/SDLB)");
-        array_pddk_akh.add("PUTUS KELAS 2 (SD/MI/SDLB)");
-        array_pddk_akh.add("PUTUS KELAS 3 (SD/MI/SDLB)");
-        array_pddk_akh.add("PUTUS KELAS 4 (SD/MI/SDLB)");
-        array_pddk_akh.add("PUTUS KELAS 5 (SD/MI/SDLB)");
-        array_pddk_akh.add("PUTUS KELAS 6 (SD/MI/SDLB)");
-        array_pddk_akh.add("TAMAT SD/MI");
-        array_pddk_akh.add("PUTUS KELAS 7 (SMP/MTS/SMPLB)");
-        array_pddk_akh.add("PUTUS KELAS 8 (SMP/MTS/SMPLB)");
-        array_pddk_akh.add("PUTUS KELAS 9 (SMP/MTS/SMPLB)");
-        array_pddk_akh.add("TAMAT SMP/MTS/SMPLB");
-        array_pddk_akh.add("PUTUS KELAS 10 (SMA/SMK/MA/SMALB)");
-        array_pddk_akh.add("PUTUS KELAS 11 (SMA/SMK/MA/SMALB)");
-        array_pddk_akh.add("PUTUS KELAS 12 (SMA/SMK/MA/SMALB)");
-        array_pddk_akh.add("TAMAT SMA/SMK/MA/SMALB");
-        array_pddk_akh.add("TIDAK MENYELESAIKAN KEJAR PAKET A");
-        array_pddk_akh.add("TIDAK MENYELESAIKAN KEJAR PAKET B");
-        array_pddk_akh.add("TIDAK MENYELESAIKAN KEJAR PAKET C");
-        spinnerPddk_akh = new SpinnerDialog(TambahAtsActivity.this,array_pddk_akh,"Pendidikan Terakhir",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+        array_pddk_akh.add("SD/MI/SDLB/PAKET A");
+        array_pddk_akh.add("SMP/MTS/SMPLB/PAKET B");
+        array_pddk_akh.add("SMA/SMK/MA/SMALB/PAKET C");
+        spinnerPddk_akh = new SpinnerDialog(TambahApdActivity.this,array_pddk_akh,"Pendidikan Saat Ini",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
         spinnerPddk_akh.setCancellable(true); // for cancellable
         spinnerPddk_akh.setShowKeyboard(false);// for open keyboard by default
         spinnerPddk_akh.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
                 tv_pddk_akh.setText(item);
-                materialDialog = new MaterialDialog.Builder(TambahAtsActivity.this)
+                materialDialog = new MaterialDialog.Builder(TambahApdActivity.this)
                         .content("Sedang Memuat...")
                         .progress(true, 0)
                         .cancelable(false)
@@ -230,14 +207,12 @@ public class TambahAtsActivity extends AppCompatActivity {
             }
         });
 
-        tx_alasan = findViewById(R.id.tx_alasan);
-
         tv_kategori = findViewById(R.id.tv_kategori);
-        array_kategori.add("Drop Out");
-        array_kategori.add("Tidak Melanjutkan");
-        array_kategori.add("Tidak Pernah Sekolah");
-
-        spinnerKategori = new SpinnerDialog(TambahAtsActivity.this,array_kategori,"Kategori",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+        array_kategori.add("Disabilitas Fisik");
+        array_kategori.add("Disabilitas Intelektual");
+        array_kategori.add("Disabilitas Mental");
+        array_kategori.add("Disabilitas Sensorik");
+        spinnerKategori = new SpinnerDialog(TambahApdActivity.this,array_kategori,"Jenis Disabilitas",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
         spinnerKategori.setCancellable(true); // for cancellable
         spinnerKategori.setShowKeyboard(false);// for open keyboard by default
         spinnerKategori.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -299,7 +274,7 @@ public class TambahAtsActivity extends AppCompatActivity {
         cardNik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                materialDialog = new MaterialDialog.Builder(TambahAtsActivity.this)
+                materialDialog = new MaterialDialog.Builder(TambahApdActivity.this)
                         .content("Sedang Memuat...")
                         .progress(true, 0)
                         .cancelable(false)
@@ -341,7 +316,6 @@ public class TambahAtsActivity extends AppCompatActivity {
                         agama.getText().toString().equals("") |
                         rt.getText().toString().equals("") |
                         rw.getText().toString().equals("") |
-                        tx_alasan.getText().toString().equals("") |
                         tv_kecamatan.getText().toString().equals("") |
                         tv_desa.getText().toString().equals("") |
                         tv_pekerjaan.getText().toString().equals("") |
@@ -352,9 +326,9 @@ public class TambahAtsActivity extends AppCompatActivity {
                         tv_pekerjaan_ayah.getText().toString().equals("") |
                         tv_pekerjaanibu.getText().toString().equals("")
                 ){
-                    Toast.makeText(TambahAtsActivity.this, "Harap Isi Semua Field Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TambahApdActivity.this, "Harap Isi Semua Field Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                 }else{
-                    materialDialog = new MaterialDialog.Builder(TambahAtsActivity.this)
+                    materialDialog = new MaterialDialog.Builder(TambahApdActivity.this)
                             .content("Sedang Menyimpan...")
                             .progress(true, 0)
                             .cancelable(false)
@@ -423,7 +397,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     array_pekerjaan.add(list_pekerjaan.get(i).getNama());
                 }
 
-                spinnerPekerjaan = new SpinnerDialog(TambahAtsActivity.this,array_pekerjaan,"Pekerjaan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerPekerjaan = new SpinnerDialog(TambahApdActivity.this,array_pekerjaan,"Pekerjaan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
 
                 spinnerPekerjaan.setCancellable(true); // for cancellable
                 spinnerPekerjaan.setShowKeyboard(false);// for open keyboard by default
@@ -435,7 +409,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     }
                 });
 
-                spinnerAyah = new SpinnerDialog(TambahAtsActivity.this,array_pekerjaan,"Pekerjaan Ayah",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerAyah = new SpinnerDialog(TambahApdActivity.this,array_pekerjaan,"Pekerjaan Ayah",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
                 spinnerAyah.setCancellable(true); // for cancellable
                 spinnerAyah.setShowKeyboard(false);// for open keyboard by default
                 spinnerAyah.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -445,7 +419,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     }
                 });
 
-                spinnerIbu = new SpinnerDialog(TambahAtsActivity.this,array_pekerjaan,"Pekerjaan Ibu",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerIbu = new SpinnerDialog(TambahApdActivity.this,array_pekerjaan,"Pekerjaan Ibu",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
                 spinnerIbu.setCancellable(true); // for cancellable
                 spinnerIbu.setShowKeyboard(false);// for open keyboard by default
                 spinnerIbu.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -480,7 +454,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     array_kecamatan.add(list_kecamatan.get(i).getName());
                 }
 
-                spinnerKecamatan =new SpinnerDialog(TambahAtsActivity.this,array_kecamatan,"Kecamatan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerKecamatan =new SpinnerDialog(TambahApdActivity.this,array_kecamatan,"Kecamatan",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
 
                 spinnerKecamatan.setCancellable(true); // for cancellable
                 spinnerKecamatan.setShowKeyboard(false);// for open keyboard by default
@@ -489,7 +463,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(String item, int position) {
                         tv_kecamatan.setText(item);
-                        materialDialog = new MaterialDialog.Builder(TambahAtsActivity.this)
+                        materialDialog = new MaterialDialog.Builder(TambahApdActivity.this)
                                 .content("Sedang Memuat...")
                                 .progress(true, 0)
                                 .cancelable(false)
@@ -529,7 +503,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     array_desa.add(list_desa.get(i).getName());
                 }
 
-                spinnerDesa =new SpinnerDialog(TambahAtsActivity.this,array_desa,"Desa",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerDesa =new SpinnerDialog(TambahApdActivity.this,array_desa,"Desa",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
 
                 spinnerDesa.setCancellable(true); // for cancellable
                 spinnerDesa.setShowKeyboard(false);// for open keyboard by default
@@ -546,14 +520,14 @@ public class TambahAtsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonArray> call, Throwable t) {
                 materialDialog.dismiss();
-                Toast.makeText(TambahAtsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahApdActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void loadSekolah(String pddk_akh){
         Service serviceAPI = Client.getClient();
-        Call<JsonArray> loadLokasi = serviceAPI.loadSekolah(pddk_akh);
+        Call<JsonArray> loadLokasi = serviceAPI.loadSekolahApd(pddk_akh);
 
         loadLokasi.enqueue(new Callback<JsonArray>() {
             @Override
@@ -568,7 +542,7 @@ public class TambahAtsActivity extends AppCompatActivity {
                     array_sekolah.add(list_sekolah.get(i).getNama());
                 }
 
-                spinnerSekolah = new SpinnerDialog(TambahAtsActivity.this,array_sekolah,"Sekolah Sebelumnya",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
+                spinnerSekolah = new SpinnerDialog(TambahApdActivity.this,array_sekolah,"Sekolah Sebelumnya",R.style.DialogAnimations_SmileWindow,"Tutup");// With 	Animation
 
                 spinnerSekolah.setCancellable(true); // for cancellable
                 spinnerSekolah.setShowKeyboard(false);// for open keyboard by default
@@ -585,14 +559,14 @@ public class TambahAtsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonArray> call, Throwable t) {
                 materialDialog.dismiss();
-                Toast.makeText(TambahAtsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahApdActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void simpan_ats(){
         Service serviceApi = Client.getClient();
-        Call<ResponseBody> simpanats = serviceApi.simpanats(
+        Call<ResponseBody> simpanats = serviceApi.simpanapd(
                 nik.getText().toString(),
                 nama.getText().toString(),
                 tempat_lahir,
@@ -612,7 +586,6 @@ public class TambahAtsActivity extends AppCompatActivity {
                 tv_pekerjaan.getText().toString(),
                 tv_pekerjaan_ayah.getText().toString(),
                 tv_pekerjaanibu.getText().toString(),
-                tx_alasan.getText().toString(),
                 tv_sekolah.getText().toString(),
                 sharedPrefManager.getSpUser(),
                 latitude.getText().toString(),
@@ -628,16 +601,16 @@ public class TambahAtsActivity extends AppCompatActivity {
                         JSONObject jsonRESULTS = new JSONObject(response.body().string());
 
                         Log.d("myTag", jsonRESULTS.toString());
-                        Toast.makeText(TambahAtsActivity.this, jsonRESULTS.getString("respon"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(TambahApdActivity.this, jsonRESULTS.getString("respon"), Toast.LENGTH_LONG).show();
                         finish();
 
                     }catch (Exception e){
-                        Toast.makeText(TambahAtsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TambahApdActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
 
                 }else{
-                    Toast.makeText(TambahAtsActivity.this, "not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TambahApdActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -645,7 +618,7 @@ public class TambahAtsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 materialDialog.dismiss();
-                Toast.makeText(TambahAtsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahApdActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
@@ -663,33 +636,20 @@ public class TambahAtsActivity extends AppCompatActivity {
                         JSONObject jsonRESULTS = new JSONObject(response.body().string());
                         if (jsonRESULTS.getString("verifikasi").equals("berhasil")){
 
-                            if (jsonRESULTS.getString("umur").equalsIgnoreCase("oke")){
-                                nama.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP"));
-                                tgl_lahir.setText(jsonRESULTS.getJSONObject("respon").getString("tgl_lahir"));
-                                jk.setText(jsonRESULTS.getJSONObject("respon").getString("JENIS_KLMIN"));
-                                agama.setText(jsonRESULTS.getJSONObject("respon").getString("AGAMA"));
-                                alamat.setText(jsonRESULTS.getJSONObject("respon").getString("ALAMAT"));
-                                rt.setText(jsonRESULTS.getJSONObject("respon").getString("NO_RT"));
-                                rw.setText(jsonRESULTS.getJSONObject("respon").getString("NO_RW"));
-                                tv_kecamatan.setText(jsonRESULTS.getJSONObject("respon").getString("KEC_NAME"));
-                                tv_desa.setText(jsonRESULTS.getJSONObject("respon").getString("KEL_NAME"));
-                                nama_ayah.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP_AYAH"));
-                                nama_ibu.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP_IBU"));
-                                tv_stat.setText(jsonRESULTS.getJSONObject("respon").getString("STATUS_KAWIN"));
-                                tempat_lahir = jsonRESULTS.getJSONObject("respon").getString("NO_PROP")+jsonRESULTS.getJSONObject("respon").getString("NO_KAB");
-                            }else{
-                                materialDialog = new MaterialDialog.Builder(TambahAtsActivity.this)
-                                        .content("Mohon Maaf, Usia ATS yang anda usulkan kurang dari 7 tahun atau sudah lebih dari 18 tahun. jadi belum/tidak dapat mengikuti program ini, Terima Kasih.")
-                                        .title("Peringatan!")
-                                        .positiveText("OK")
-                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                            @Override
-                                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                                materialDialog.dismiss();
-                                            }
-                                        })
-                                        .show();
-                            }
+                            nama.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP"));
+                            tgl_lahir.setText(jsonRESULTS.getJSONObject("respon").getString("tgl_lahir"));
+                            jk.setText(jsonRESULTS.getJSONObject("respon").getString("JENIS_KLMIN"));
+                            agama.setText(jsonRESULTS.getJSONObject("respon").getString("AGAMA"));
+                            alamat.setText(jsonRESULTS.getJSONObject("respon").getString("ALAMAT"));
+                            rt.setText(jsonRESULTS.getJSONObject("respon").getString("NO_RT"));
+                            rw.setText(jsonRESULTS.getJSONObject("respon").getString("NO_RW"));
+                            tv_kecamatan.setText(jsonRESULTS.getJSONObject("respon").getString("KEC_NAME"));
+                            tv_desa.setText(jsonRESULTS.getJSONObject("respon").getString("KEL_NAME"));
+                            nama_ayah.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP_AYAH"));
+                            nama_ibu.setText(jsonRESULTS.getJSONObject("respon").getString("NAMA_LGKP_IBU"));
+                            tv_stat.setText(jsonRESULTS.getJSONObject("respon").getString("STATUS_KAWIN"));
+                            tempat_lahir = jsonRESULTS.getJSONObject("respon").getString("NO_PROP")+jsonRESULTS.getJSONObject("respon").getString("NO_KAB");
+
 
 
 
@@ -698,22 +658,22 @@ public class TambahAtsActivity extends AppCompatActivity {
 
 
                         }else{
-                            Toast.makeText(TambahAtsActivity.this, jsonRESULTS.getString("respon"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TambahApdActivity.this, jsonRESULTS.getString("respon"), Toast.LENGTH_SHORT).show();
                         }
                     }catch (Exception e){
-                        Toast.makeText(TambahAtsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TambahApdActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
 
                 }else{
-                    Toast.makeText(TambahAtsActivity.this, "gagal", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TambahApdActivity.this, "gagal", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 materialDialog.dismiss();
-                Toast.makeText(TambahAtsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahApdActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });

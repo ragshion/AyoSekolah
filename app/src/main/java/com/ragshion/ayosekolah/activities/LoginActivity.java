@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("Success", "Login");
                         login_code = "1";
+
                         GraphRequest request = GraphRequest.newMeRequest(
                                 loginResult.getAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
@@ -144,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         try{
                                             String email = object.getString("email");
-                                            String url = "https://graph.facebook.com/"+object.getString("id")+"/picture?type=large";
+//                                            String url = "https://graph.facebook.com/"+object.getString("id")+"/picture?type=large";
 
 //                                            Glide
 //                                                    .with(LoginActivity.this)
@@ -159,9 +160,11 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
                             Bundle parameters = new Bundle();
-                            parameters.putString("fields", "id,name,email,gender,birthday");
+//                            parameters.putString("fields", "id,name,email,gender,birthday");
+                            parameters.putString("fields", "id,name,email");
                             request.setParameters(parameters);
                             request.executeAsync();
+
 //                        Toast.makeText(LoginActivity.this, "selamat datang", Toast.LENGTH_SHORT).show();
                     }
 
@@ -182,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
         fb_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email", "user_birthday"));
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email"));
             }
         });
     //END OF FACEBOOK LOGIN

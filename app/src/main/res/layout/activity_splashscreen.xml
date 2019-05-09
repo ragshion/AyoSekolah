@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/icon_app"
-            android:layout_width="172dp"
-            android:layout_height="172dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_logo"
             />
 

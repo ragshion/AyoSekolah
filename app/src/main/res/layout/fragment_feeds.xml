@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/mainappbar"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/dataztoolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/mainappbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/dataztoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <ImageView
+                    android:id="@+id/ic_livesearch"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_search"/>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/mainappbar"
+            android:id="@+id/recyclerview_list_feeds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/loading"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/loading_elips"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:text=""/>
 
-            <ImageView
-                android:id="@+id/ic_livesearch"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="right"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_search"/>
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/mainappbar"
-        android:id="@+id/recyclerview_list_feeds"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/loading"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/loading_elips"
-        android:layout_centerInParent="true"
-        />
-
-    <TextView
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:text=""/>
-
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

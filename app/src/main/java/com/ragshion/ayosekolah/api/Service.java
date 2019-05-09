@@ -47,6 +47,10 @@ public interface Service {
     Call<List<Dataz>> getApiAkun(@Query("user") String user,
                               @Query("index") int index);
 
+    @GET("android/api_akun_apd/")
+    Call<List<Dataz>> getApiAkunApd(@Query("user") String user,
+                                 @Query("index") int index);
+
 
     @GET("android/livesearch")
     Call<List<Dataz>> getLivesearch(
@@ -79,6 +83,11 @@ public interface Service {
             @Query("pddk_akh") String pddk_akh
     );
 
+    @GET("android/load_sekolah_apd")
+    Call<JsonArray> loadSekolahApd(
+            @Query("pddk_akh") String pddk_akh
+    );
+
     @FormUrlEncoded
     @POST("android/cek_login_oauth")
     Call<ResponseBody> cek_login_oauth(
@@ -101,7 +110,8 @@ public interface Service {
 
     @GET("android/count_akun")
     Call<ResponseBody> countAkun(
-            @Query("user") String user
+            @Query("user") String user,
+            @Query("table") String table
     );
 
     @FormUrlEncoded
@@ -134,6 +144,35 @@ public interface Service {
             @Field("pekerjaan_ayah") String pekerjaan_ayah,
             @Field("pekerjaan_ibu") String pekerjaan_ibu,
             @Field("alasan") String alasan,
+            @Field("sekolah_sebelumnya") String sekolah_sebelumnya,
+            @Field("user") String user,
+            @Field("lat") String latitude,
+            @Field("lng") String longitude,
+            @Field("foto") String foto
+    );
+
+    @FormUrlEncoded
+    @POST("android/simpan_apd")
+    Call<ResponseBody> simpanapd(
+            @Field("nik") String nik,
+            @Field("nama_lgkp") String nama_lgkp,
+            @Field("tmpt_lhr") String tempat_lahir,
+            @Field("tgl_lahir") String tgl_lahir,
+            @Field("jk") String jk,
+            @Field("jenis_disabilitas") String kategori,
+            @Field("nama_ayah") String nama_ayah,
+            @Field("nama_ibu") String nama_ibu,
+            @Field("pddk_akh") String pddk_akh,
+            @Field("alamat") String alamat,
+            @Field("rt") String rt,
+            @Field("rw") String rw,
+            @Field("desa_kel") String desa_kel,
+            @Field("kecamatan") String kecamatan,
+            @Field("agama") String agama,
+            @Field("stat_kwn") String stat_kwn,
+            @Field("pekerjaan") String pekerjaan,
+            @Field("pekerjaan_ayah") String pekerjaan_ayah,
+            @Field("pekerjaan_ibu") String pekerjaan_ibu,
             @Field("sekolah_sebelumnya") String sekolah_sebelumnya,
             @Field("user") String user,
             @Field("lat") String latitude,

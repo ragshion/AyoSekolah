@@ -138,7 +138,16 @@
             android:parentActivityName=".activities.MenuUtamaActivity">
 
         </activity>
+        <activity
+            android:name=".activities.TambahApdActivity"
+            android:label="Tambah Data APD/ABK"
+            android:parentActivityName=".activities.MenuUtamaActivity">
+
+        </activity>
         <activity android:name=".activities.DatazAkunActivity">
+
+        </activity>
+        <activity android:name=".activities.DatazAkunApdActivity">
 
         </activity>
         <activity android:name=".mapbox.ClickOnLayerActivity">

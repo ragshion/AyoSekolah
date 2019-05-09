@@ -5,7 +5,7 @@
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
     <string name="account">Account</string>
-    <string name="pathfoto">http://kudusekolah.pekalongankab.go.id/assets/foto-ats/</string>
+    <string name="pathfoto">http://192.168.1.188/bts/assets/foto-ats/</string>
 
     <string name="facebook_app_id">2209471329110181</string>
     <string name="fb_login_protocol_scheme">fb2209471329110181</string>
